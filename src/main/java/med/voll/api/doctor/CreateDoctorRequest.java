@@ -8,19 +8,11 @@ import jakarta.validation.constraints.Pattern;
 import med.voll.api.address.CreateAddressRequest;
 
 public record CreateDoctorRequest(
-        @NotBlank
-        String name,
-        @NotBlank
-        @Email
-        String email,
-        @NotBlank
-        String phone,
-        @NotBlank
-        @Pattern(regexp = "\\d{4,6}")
-        String crm,
-        @NotNull
-        Specialty specialty,
-        @Valid
-        CreateAddressRequest address
+        @NotBlank String name,
+        @NotBlank @Email String email,
+        @NotBlank String phone,
+        @NotBlank @Pattern(regexp = "\\d{4,6}") String crm,
+        @NotNull Specialty specialty,
+        @Valid CreateAddressRequest address
 ) {
 }
