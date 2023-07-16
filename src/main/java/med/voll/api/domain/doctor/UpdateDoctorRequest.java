@@ -1,6 +1,6 @@
-package med.voll.api.doctor;
+package med.voll.api.domain.doctor;
 
-import med.voll.api.address.UpdateAddressRequest;
+import med.voll.api.domain.address.UpdateAddressRequest;
 
 public record UpdateDoctorRequest (
     String name,

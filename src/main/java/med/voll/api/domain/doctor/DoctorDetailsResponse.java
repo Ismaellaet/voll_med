@@ -1,6 +1,6 @@
-package med.voll.api.doctor;
+package med.voll.api.domain.doctor;
 
-import med.voll.api.address.Address;
+import med.voll.api.domain.address.Address;
 
 public record DoctorDetailsResponse(Long id, String name, String email, String phone, String crm, Specialty specialty, Address address) {
     public DoctorDetailsResponse(Doctor doctor) {
