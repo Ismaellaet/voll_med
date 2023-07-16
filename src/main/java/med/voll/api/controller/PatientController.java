@@ -6,8 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.UriComponentsBuilder;
 
 @RestController
 @RequestMapping("/patients")
@@ -17,8 +19,11 @@ public class PatientController {
 
     @PostMapping
     @Transactional
-    public void createPatient(@RequestBody @Valid CreatePatientRequest request) {
-        repository.save(new Patient(request));
+    public ResponseEntity createPatient(@RequestBody @Valid CreatePatientRequest request, UriComponentsBuilder uriBuilder) {
+        Patient patient = new Patient(request);
+        repository.save(patient);
+        var uri = uriBuilder.path("/patients/{id}").buildAndExpand(patient.getId()).toUri();
+        return ResponseEntity.created(uri).body(new PatientDetailsResponse(patient));
     }
 
     @GetMapping
@@ -28,15 +33,17 @@ public class PatientController {
 
     @PutMapping("/{id}")
     @Transactional
-    public void updatePatient(@PathVariable Long id, @RequestBody @Valid UpdatePatientRequest request) {
-        var patient = repository.getReferenceById(id);
+    public ResponseEntity updatePatient(@PathVariable Long id, @RequestBody @Valid UpdatePatientRequest request) {
+        Patient patient = repository.getReferenceById(id);
         patient.update(request);
+        return ResponseEntity.ok(new PatientDetailsResponse(patient));
     }
 
     @DeleteMapping("/{id}")
     @Transactional
-    public void inactivatePatient(@PathVariable Long id) {
-        var patient = repository.getReferenceById(id);
+    public ResponseEntity inactivatePatient(@PathVariable Long id) {
+        Patient patient = repository.getReferenceById(id);
         patient.inactivate();
+        return ResponseEntity.noContent().build();
     }
 }
