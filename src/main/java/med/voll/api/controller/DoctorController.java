@@ -33,6 +33,13 @@ public class DoctorController {
         return repository.findAllByActiveTrue(pagination).map(ListDoctorResponse::new);
     }
 
+    @GetMapping("/{id}")
+    @Transactional
+    public ResponseEntity getDoctor(@PathVariable Long id) {
+        var doctor = repository.getReferenceById(id);
+        return ResponseEntity.ok(new DoctorDetailsResponse(doctor));
+    }
+
     @PutMapping("/{id}")
     @Transactional
     public ResponseEntity updateDoctor(@PathVariable Long id, @RequestBody @Valid UpdateDoctorRequest request) {
