@@ -31,6 +31,13 @@ public class PatientController {
         return repository.findAllByActiveTrue(pagination).map(ListPatientResponse::new);
     }
 
+    @GetMapping("/{id}")
+    @Transactional
+    public ResponseEntity getPatient(@PathVariable Long id) {
+        Patient patient = repository.getReferenceById(id);
+        return ResponseEntity.ok(new PatientDetailsResponse(patient));
+    }
+
     @PutMapping("/{id}")
     @Transactional
     public ResponseEntity updatePatient(@PathVariable Long id, @RequestBody @Valid UpdatePatientRequest request) {
