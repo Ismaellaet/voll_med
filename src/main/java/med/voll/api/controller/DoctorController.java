@@ -5,6 +5,7 @@ import med.voll.api.doctor.CreateDoctorRequest;
 import med.voll.api.doctor.Doctor;
 import med.voll.api.doctor.DoctorRepository;
 import med.voll.api.doctor.ListDoctorResponse;
+import med.voll.api.doctor.UpdateDoctorRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -27,5 +28,12 @@ public class DoctorController {
     @GetMapping
     public Page<ListDoctorResponse> listDoctor(@PageableDefault(size = 10, sort = {"name"}) Pageable pagination) {
         return repository.findAll(pagination).map(ListDoctorResponse::new);
+    }
+
+    @PutMapping("/{id}")
+    @Transactional
+    public void updateDoctor(@PathVariable Long id, @RequestBody @Valid UpdateDoctorRequest request) {
+        var doctor = repository.getReferenceById(id);
+        doctor.update(request);
     }
 }

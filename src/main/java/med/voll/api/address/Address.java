@@ -27,4 +27,58 @@ public class Address {
         this.number = data.number();
         this.complement = data.complement();
     }
+
+    public void update(UpdateAddressRequest data) {
+        if (data != null) {
+            setStreet(data.street());
+            setNeighborhood(data.neighborhood());
+            setZipcode(data.zipcode());
+            setCity(data.city());
+            setState(data.state());
+            setNumber(data.number());
+            setComplement(data.complement());
+        }
+    }
+
+    public void setStreet(String street) {
+        if (street != null) {
+            this.street = street;
+        }
+    }
+
+    public void setNeighborhood(String neighborhood) {
+        if (neighborhood != null) {
+            this.neighborhood = neighborhood;
+        }
+    }
+
+    public void setZipcode(String zipcode) {
+        if (zipcode != null) {
+            this.zipcode = zipcode;
+        }
+    }
+
+    public void setCity(String city) {
+        if (city != null) {
+            this.city = city;
+        }
+    }
+
+    public void setState(String state) {
+        if (state != null) {
+            this.state = state;
+        }
+    }
+
+    public void setNumber(String number) {
+        if (number != null) {
+            this.number = number;
+        }
+    }
+
+    public void setComplement(String complement) {
+        if (complement != null) {
+            this.complement = complement;
+        }
+    }
 }

@@ -35,4 +35,22 @@ public class Doctor {
         this.specialty = data.specialty();
         this.address = new Address(data.address());
     }
+
+    public void update(UpdateDoctorRequest data) {
+        setName(data.name());
+        setPhone(data.phone());
+        this.address.update(data.address());
+    }
+
+    public void setName(String name) {
+        if (name != null) {
+            this.name = name;
+        }
+    }
+
+    public void setPhone(String phone) {
+        if (phone != null) {
+            this.phone = phone;
+        }
+    }
 }
