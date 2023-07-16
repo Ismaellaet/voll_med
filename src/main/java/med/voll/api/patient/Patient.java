@@ -22,6 +22,7 @@ public class Patient {
     private String cpf;
     @Embedded
     private Address address;
+    private Boolean active;
 
     public Patient(CreatePatientRequest data) {
         this.name = data.name();
@@ -29,6 +30,7 @@ public class Patient {
         this.phone = data.phone();
         this.cpf = data.cpf();
         this.address = new Address(data.address());
+        this.active = true;
     }
 
     public void update(UpdatePatientRequest data) {
@@ -49,4 +51,7 @@ public class Patient {
         }
     }
 
+    public void inactivate() {
+        this.active = false;
+    }
 }
