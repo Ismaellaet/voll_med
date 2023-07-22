@@ -34,7 +34,6 @@ public class PatientController {
     }
 
     @GetMapping("/{id}")
-    @Transactional
     public ResponseEntity getPatient(@PathVariable Long id) {
         Patient patient = repository.getReferenceById(id);
         return ResponseEntity.ok(new PatientDetailsResponse(patient));
