@@ -6,3 +6,7 @@ spring:
 server:
   error:
     include-stacktrace: never
+api:
+  security:
+    token:
+      secret: ${JWT_SECRET:demo_secret}
